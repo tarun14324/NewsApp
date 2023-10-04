@@ -10,6 +10,7 @@ import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import com.bumptech.glide.Glide
+import com.example.newsapp.R
 import com.example.newsapp.databinding.FragmentDetailBinding
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -36,7 +37,10 @@ class DetailsFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        Glide.with(requireContext()).load(args.item.urlToImage).into(binding.imageView)
+        Glide.with(requireContext()).load(args.item.urlToImage)
+            .error(R.drawable.ic_no_data)
+            .placeholder(R.drawable.ic_no_data)
+            .into(binding.imageView)
         binding.tvAuthor.text = args.item.author
         binding.tvTitle.text = args.item.title
         binding.tvDesc.text = args.item.description
